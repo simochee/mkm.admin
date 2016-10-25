@@ -31,9 +31,10 @@ gulp.task('pug', () => {
 		.pipe(gulp.dest('./docs'));
 });
 
-gulp.task('images', () => {
-	gulp.src('./src/img/**/*')
-		.pipe(gulp.dest('./docs/images'));
+gulp.task('public', () => {
+	gulp.src('./src/public/**/*', {
+		base: './src/public'
+	}).pipe(gulp.dest('./docs/assets'));
 });
 
 gulp.task('watch', () => {

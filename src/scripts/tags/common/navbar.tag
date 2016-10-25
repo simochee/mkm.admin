@@ -13,6 +13,7 @@ navbar
 
 		self.title = opts.title || 'myAdmin for 村村村';
 
+		// スライドナビのトリガー
 		self.isOpen = false;
 		self.openMenu = function() {
 			self.isOpen = ~self.isOpen;

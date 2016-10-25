@@ -10,6 +10,7 @@ slide-menu
 		.copyright Developed by simochee @ 2016
 
 	script.
+		// ナビゲーションリスト
 		this.menu = [
 			{
 				title: 'サイトを開く',

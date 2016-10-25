@@ -1,6 +1,7 @@
 // Tagファイルを呼び出し
 require('./tags/common/navbar');
 require('./tags/common/slide-menu');
+require('./tags/common/btn');
 
 
 /*
@@ -12,7 +13,17 @@ riot.route('/', () => {
 
 	// routeタグにhomeをマウント
 	riot.mount('route', 'home', {
-		title: 'myAdmin.vβ'
+		title: 'Home'
+	});
+});
+
+// Access: /rec - おすすめ
+riot.route('/rec', () => {
+	require('./tags/recommend');
+
+	// routeタグにrecommendをマウント
+	riot.mount('route', 'recommend', {
+		title: 'おすすめ'
 	})
 });
 
