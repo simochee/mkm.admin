@@ -21,6 +21,7 @@ riot.route('/', () => {
 // Access: /rec - おすすめ
 riot.route('/rec', () => {
 	require('./tags/recommend');
+	require('./tags/menu-list');
 
 	navbar.setTitle('おすすめ');
 	// routeタグにrecommendをマウント

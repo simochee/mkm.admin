@@ -4,7 +4,7 @@ recommend
 			h2
 				.input.large
 					input.input-form(value="{data.title}" readonly="{!edit}")
-			button.btn.btn-small(type="button" onclick="{toggleMode}" class="btn-{edit ? 'danger' : 'safety'}") {edit ? '終了' : '編集'}
+			button.btn.btn-small(type="button" onclick="{toggleMode}" class="btn-{edit ? 'danger' : 'safety'}") {edit ? '保存' : '編集'}
 
 		.thumb(class="{disactive: !usePicture}")
 			img.picture(src="./images/menu/{data.pic}")
@@ -24,21 +24,33 @@ recommend
 						textarea.input-form#comment(value="{data.comment}" readonly="{!edit}")
 
 		.openList(if="{edit}")
-			button.btn.btn-large.btn-primary.btn-block 選択
+			button.btn.btn-large.btn-primary.btn-block(onclick="{toggleMenuList}") 選択
 
-	.modal
+	.modal#menuList
 		menu-list
+		button.btn.btn-normal.btn-danger.btn-block(onclick="{toggleMenuList}") 閉じる
 
 	script.
 		var store = require('../store');
 		var utils = require('../utils');
+		var anime = require('animejs');
 		var self = this;
 
 		self.edit = false;
 		self.toggleMode = function() {
+			if(self.edit) {
+				self.update();
+				store.getRecommend().then(function(data) {
+					console.log(data, self.data)
+					if(JSON.stringify(data) !== JSON.stringify(self.data)) {
+						console.log('データが更新されたよ！');
+					} else {
+						console.log('でーたがかわってないよ！')
+					}
+				});
+			}
 			self.edit = ~self.edit;
 		}
-
 
 		self.usePicture = -1;
 		self.toggleUsePic = function() {
@@ -46,12 +58,42 @@ recommend
 			self.usePicture = ~self.usePicture;
 		}
 
+		var isModalOpen = false;
+		self.toggleMenuList = function() {
+			var $ele = document.getElementById('menuList');
+			if(isModalOpen) {
+				isModalOpen = false;
+				anime({
+					targets: $ele,
+					duration: 300,
+					easing: 'easeOutCubic',
+					translateY: '40px',
+					opacity: 0,
+					complete: function() {
+						$ele.style.display = 'none';
+					}
+				});
+			}
+			else {
+				isModalOpen = true;
+				$ele.style.transform = 'translateY(40px)';
+				$ele.style.display = 'block';
+				anime({
+					targets: $ele,
+					duration: 450,
+					easing: 'easeOutCubic',
+					translateY: 0,
+					opacity: 1
+				});
+			}
+		}
+
 		self.on('mount', function() {
 			utils.autoResize(document.getElementById('comment'));
-			store.getRecommend('getRec');
+
 		});
 
-		obs.on('getRec', function(data) {
+		store.getRecommend('getRec').then(function(data) {
 			self.data = data;
 			self.update();
 		});
@@ -181,6 +223,19 @@ recommend
 					white-space: nowrap
 					text-overflow: ellipsis
 
+		.modal
+			position: fixed
+			top: 50px
+			left: 0
+			bottom: 0
+			right: 0
+			overflow-y: auto
+			display: none
+			background: #fff
+			box-sizing: border-box
+			opacity: 0
+			z-index: 99
+
 		.btn
 			border: none
 			&.btn-small
@@ -188,6 +243,11 @@ recommend
 				padding: 0 15px
 				font-size: 14px
 				line-height: 30px
+			&.btn-normal
+				height: 40px
+				padding: 0 20px
+				font-size: 16px
+				line-height: 40px
 			&.btn-large
 				height: 50px
 				padding: 0 30px
