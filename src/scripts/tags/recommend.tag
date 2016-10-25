@@ -10,7 +10,7 @@ recommend
 			img.picture(src="./images/menu/{data.pic}")
 			.onhover
 				.overlay
-					button.btn.btn-warning.btn-large(class="{btn-outline: !usePicture}" onclick="{toggleUsePic}") {usePicture ? '使用しない' : '使用する'}
+					button.btn.btn-warning.btn-large(class="{btn-outline: !usePicture}" onclick="{toggleUsePic}") {usePicture ? '画像を使用する' : '画像を使用しない'}
 		.info
 			ul.input-group
 				li.menu-name
@@ -88,9 +88,20 @@ recommend
 			}
 		}
 
+		obs.on('changeRecommend', function(data) {
+			self.data = {
+				title: self.data.title,
+				name: data.name,
+				price: data.price,
+				comment: data.comment,
+				pic: data.image || 'poteto-salad.jpg'
+			};
+			self.update();
+			self.toggleMenuList();
+		});
+
 		self.on('mount', function() {
 			utils.autoResize(document.getElementById('comment'));
-
 		});
 
 		store.getRecommend('getRec').then(function(data) {

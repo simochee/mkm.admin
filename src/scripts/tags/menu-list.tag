@@ -6,7 +6,7 @@ menu-list
 				li(each="{cat in type.list}")
 					.category {cat.ja}
 					ol.menu-item
-						li(each="{item in cat.menu}")
+						li(each="{item in cat.menu}" onclick="{changeItem(item)}")
 							.left
 								.thumb(style="background-image: url(./images/menu/{item.image})")
 							.right
@@ -23,6 +23,12 @@ menu-list
 				console.log(_this)
 				_this.cat.isOpen = ~_this.cat.isOpen;
 				self.update()
+			}
+		}
+
+		self.changeItem = function(data) {
+			return function() {
+				obs.trigger('changeRecommend', data);
 			}
 		}
 
