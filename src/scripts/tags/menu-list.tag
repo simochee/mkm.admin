@@ -3,10 +3,17 @@ menu-list
 	ol.menu-list-wrapper
 		li(each="{type in data}") 
 			ol.menu-list
-				li(each="{cat in type.list}" onload="{cat.isOpen = false}" onclick="{toggleItem(this)}")
+				li(each="{cat in type.list}")
 					.category {cat.ja}
-					ol.menu-item(if="{false}")
-						li(each="{item in cat.menu}") {item.name}
+					ol.menu-item
+						li(each="{item in cat.menu}")
+							.left
+								.thumb(style="background-image: url(./images/menu/{item.image})")
+							.right
+								.name {item.name}
+								.price {item.price}円
+								.comment {item.comment}
+
 	script.
 		var store = require('../store');
 		var self = this;
@@ -35,6 +42,7 @@ menu-list
 					border-bottom: 1px solid  #ccc
 					line-height: 40px
 					text-align: center
+					transition: background-color .4 ease
 					&::before
 						content: "\f123";
 						position: absolute
@@ -44,7 +52,44 @@ menu-list
 						height: 40px
 						text-align: center
 						line-height: 40px
-						font-family: 'Ionicons';
+						font-family: 'Ionicons'
 						font-size: 13px
 						transform: rotate(-90deg)
+					&:hover
+						background: #ccc
 				.menu-item
+					li
+						overflow: hidden
+						clear: both
+						height: 80px
+						border-bottom: 1px solid #ccc
+						&:hover
+							background: #ddd
+						.left
+							float: left
+							width: 120px
+							.thumb
+								width: 100px
+								height: 70px
+								margin: 5px 10px
+								background: center center no-repeat #eee
+								background-size: cover
+						.right
+							margin-left: 120px
+							padding: 15px 5px 0 0
+							& > div
+								overflow: hidden
+								white-space: nowrap
+								text-overflow: ellipsis
+							.name
+								height: 20px
+								line-height: 20px
+								font-size: 16px
+							.price
+								height: 15px
+								line-height: 15px
+								font-size: 10px
+							.comment
+								height: 20px
+								line-height: 20px
+								font-size: 12px
