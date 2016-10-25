@@ -7,7 +7,6 @@ slide-menu
 				a.anchor(href="#" onclick="{close(item.href)}" target="{item._blank ? '_blank' : '_self'}")
 					span.icon(class="{item.icon}")
 					span.title {item.title}
-		.copyright Developed by simochee @ 2016
 
 	script.
 		this.close = function(href) {
@@ -64,6 +63,12 @@ slide-menu
 			&.open
 				left: 0
 			.menu-list
+				overflow-y: scroll
+				position: absolute
+				top: 0
+				left: 0
+				bottom: 0
+				right: 0
 				.block
 					display: -webkit-flex
 					display: -moz-flex
