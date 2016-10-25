@@ -1,22 +1,37 @@
 slide-menu
 	.slide-menu(class="{open: opts.isOpen}")
 		ul.menu-list
-			li.thumb
+			li.block
 				img.logo(src="./images/logo.svg")
 			li.list-item(each="{item in menu}")
-				a.anchor(href="{item.href}" target="{item._blank ? '_blank' : '_self'}")
+				a.anchor(href="#" onclick="{close(item.href)}" target="{item._blank ? '_blank' : '_self'}")
 					span.icon(class="{item.icon}")
 					span.title {item.title}
 		.copyright Developed by simochee @ 2016
 
 	script.
-		// ナビゲーションリスト
+		this.close = function(href) {
+			return function(e) {
+				location.href = href;
+				obs.trigger('sildeMenu:close');
+			}
+		}
 		this.menu = [
 			{
 				title: 'サイトを開く',
 				icon: 'ion-android-home',
 				href: 'http://村村村.shop',
 				_blank: true
+			},
+			{
+				title: 'おしらせ',
+				icon: 'ion-edit',
+				href: '#/blog'
+			},
+			{
+				title: 'お品書き',
+				icon: 'ion-ios-list-outline',
+				href: '#/menu'
 			},
 			{
 				title: 'おすすめ',
@@ -27,11 +42,6 @@ slide-menu
 				title: '営業日',
 				icon: 'ion-android-calendar',
 				href: '#/bus'
-			},
-			{
-				title: 'おしらせ',
-				icon: 'ion-edit',
-				href: '#/blog'
 			},
 			{
 				title: 'アクセス',
@@ -54,7 +64,7 @@ slide-menu
 			&.open
 				left: 0
 			.menu-list
-				.thumb
+				.block
 					display: -webkit-flex
 					display: -moz-flex
 					display: -ms-flex

@@ -34,7 +34,7 @@ gulp.task('pug', () => {
 gulp.task('public', () => {
 	gulp.src('./src/public/**/*', {
 		base: './src/public'
-	}).pipe(gulp.dest('./docs/assets'));
+	}).pipe(gulp.dest('./docs'));
 });
 
 gulp.task('watch', () => {

@@ -11,13 +11,21 @@ navbar
 	script.
 		var self = this;
 
-		self.title = opts.title || 'myAdmin for 村村村';
+		self.mixin({
+			setTitle: function(title) {
+				self.title = title;
+				self.update();
+			}
+		});
 
-		// スライドナビのトリガー
 		self.isOpen = false;
 		self.openMenu = function() {
 			self.isOpen = ~self.isOpen;
 		}
+		obs.on('sildeMenu:close', function() {
+			self.isOpen = false;
+			self.update();
+		});
 
 	style(type="sass" scoped).
 		.navbar

@@ -1,5 +1,4 @@
 home
-	navbar(title="{opts.title}")
 
 	a(href="http://examle.com" target="_blank").home-logo
 		img(src="./images/logo.svg")

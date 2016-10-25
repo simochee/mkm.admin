@@ -3,6 +3,8 @@ require('./tags/common/navbar');
 require('./tags/common/slide-menu');
 require('./tags/common/btn');
 
+// navbarをマウント
+const navbar = riot.mount('navbar')[0];
 
 /*
  * Routerを設定
@@ -11,20 +13,18 @@ require('./tags/common/btn');
 riot.route('/', () => {
 	require('./tags/home');
 
+	navbar.setTitle('Home')
 	// routeタグにhomeをマウント
-	riot.mount('route', 'home', {
-		title: 'Home'
-	});
+	riot.mount('route', 'home');
 });
 
 // Access: /rec - おすすめ
 riot.route('/rec', () => {
 	require('./tags/recommend');
 
+	navbar.setTitle('おすすめ');
 	// routeタグにrecommendをマウント
-	riot.mount('route', 'recommend', {
-		title: 'おすすめ'
-	})
+	riot.mount('route', 'recommend')
 });
 
 // Router起動用Moduleを用意
