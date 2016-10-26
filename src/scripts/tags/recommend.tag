@@ -6,9 +6,9 @@ recommend
 					input.input-form(value="{data.title}" readonly="{!edit}")
 			button.btn.btn-small(type="button" onclick="{toggleMode}" class="btn-{edit ? 'danger' : 'safety'}") {edit ? '保存' : '編集'}
 
-		.thumb(class="{disactive: !usePicture}")
+		.thumb
 			.dummy(if="{data.pic == 'non-pic'}") 画像がありません
-			div(if="{data.pic != 'non-pic'}")
+			.body(if="{data.pic != 'non-pic'}" class="{disactive: !usePicture}")
 				img.picture(src="./images/menu/{data.pic}")
 				.onhover
 					.overlay
@@ -157,37 +157,38 @@ recommend
 				text-align: center
 				line-height: 250px
 				font-size: 18px
-				color: #111
-			.onhover
-				display: none
-				.overlay
-					position: absolute
-					top: 0
-					left: 0
-					bottom: 0
-					right: 0
-					display: -webkit-flex
-					display: -moz-flex
-					display: -ms-flex
-					display: -o-flex
-					display: flex
-					align-items: center
-					justify-content: center
-					.btn
-						position: relative
-						z-index: 1
-			&.disactive
-				position: relative
-				&::after
-					content: ''
-					position: absolute
-					top: 0
-					left: 0
-					bottom: 0
-					right: 0
-					background: rgba(#fff, 0.7)
+				color: #999
+			.body
 				.onhover
-					display: block
+					display: none
+					.overlay
+						position: absolute
+						top: 0
+						left: 0
+						bottom: 0
+						right: 0
+						display: -webkit-flex
+						display: -moz-flex
+						display: -ms-flex
+						display: -o-flex
+						display: flex
+						align-items: center
+						justify-content: center
+						.btn
+							position: relative
+							z-index: 1
+				&.disactive
+					position: relative
+					&::after
+						content: ''
+						position: absolute
+						top: 0
+						left: 0
+						bottom: 0
+						right: 0
+						background: rgba(#fff, 0.7)
+					.onhover
+						display: block
 		.info
 			margin-top: 10px
 			.input-group
@@ -214,7 +215,7 @@ recommend
 			margin: 20px 15px 0
 		.edit
 			.thumb
-				&:not(.disactive)
+				.body:not(.disactive)
 					.onhover
 						display: none
 					&:hover
