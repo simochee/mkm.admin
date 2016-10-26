@@ -4,7 +4,7 @@ menu-list
 		li(each="{type in data}") 
 			ol.menu-list
 				li(each="{cat in type.list}")
-					.category {cat.ja}
+					.category.test.sample.what(onclick="{openItems}") {cat.ja}
 					ol.menu-item
 						li(each="{item in cat.menu}" onclick="{changeItem(item)}")
 							.left
@@ -32,11 +32,23 @@ menu-list
 			}
 		}
 
+		self.openItems = function(e) {
+			var $elem = e.target;
+			
+			if(~$elem.classList.value.indexOf('open')) {
+				$elem.classList.remove('open');
+			} else {
+				$elem.classList.add('open')
+			}
+			
+		}
+
 		store.getMenuList().then(function(data) {
 			self.data = data;
 			console.log(data)
 			self.update();
 		});
+
 
 	style(type="sass" scoped).
 		.menu-list-wrapper
@@ -63,7 +75,13 @@ menu-list
 						transform: rotate(-90deg)
 					&:hover
 						background: #ccc
+					&.open
+						&::before
+							transform: rotate(0)
+						& + .menu-item
+							display: block
 				.menu-item
+					display: none
 					li
 						overflow: hidden
 						clear: both

@@ -28,6 +28,32 @@ riot.route('/rec', () => {
 	riot.mount('route', 'recommend')
 });
 
+// Access: /menu - お品書き
+riot.route('/menu', () => {
+	require('./tags/menu');
+	require('./tags/menu-list');
+
+	navbar.setTitle('お品書き');
+	// routeタグにmenuをマウント
+	riot.mount('route', 'menu');
+});
+
+// News: /news - おしらせ
+riot.route('/news', () => {
+	require('./tags/news');
+
+	navbar.setTitle('おしらせ');
+	// routeタグにnewsをマウント
+	riot.mount('route', 'news');
+});
+
+riot.route(() => {
+	require('./tags/home');
+
+	navbar.setTitle('myAdmin for 村村村');
+	riot.mount('route', 'home');
+})
+
 // Router起動用Moduleを用意
 module.exports = {
 	start: () => {

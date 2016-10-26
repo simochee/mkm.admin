@@ -19,13 +19,13 @@ slide-menu
 			{
 				title: 'サイトを開く',
 				icon: 'ion-android-home',
-				href: 'http://村村村.shop',
+				href: 'http://村村村.com',
 				_blank: true
 			},
 			{
 				title: 'おしらせ',
 				icon: 'ion-edit',
-				href: '#/blog'
+				href: '#/news'
 			},
 			{
 				title: 'お品書き',

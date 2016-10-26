@@ -7,10 +7,13 @@ recommend
 			button.btn.btn-small(type="button" onclick="{toggleMode}" class="btn-{edit ? 'danger' : 'safety'}") {edit ? '保存' : '編集'}
 
 		.thumb(class="{disactive: !usePicture}")
-			img.picture(src="./images/menu/{data.pic}")
-			.onhover
-				.overlay
-					button.btn.btn-warning.btn-large(class="{btn-outline: !usePicture}" onclick="{toggleUsePic}") {usePicture ? '画像を使用する' : '画像を使用しない'}
+			.dummy(if="{data.pic == 'non-pic'}")
+				button.btn.btn-normal.btn-large.btn-outline(readonly) 画像がありません
+			div(if="{data.pic != 'non-pic'}")
+				img.picture(src="./images/menu/{data.pic}")
+				.onhover
+					.overlay
+						button.btn.btn-warning.btn-large(class="{btn-outline: !usePicture}" onclick="{toggleUsePic}") {usePicture ? '画像を使用する' : '画像を使用しない'}
 		.info
 			ul.input-group
 				li.menu-name
@@ -21,14 +24,14 @@ recommend
 						input.input-form(value="{data.price}" readonly="{!edit}")
 				li.menu-comment
 					.input.normal
-						textarea.input-form#comment(value="{data.comment}" readonly="{!edit}")
+						textarea.input-form#comment(value="{data.comment}" placeholder="コメントを掲載しません" readonly="{!edit}")
 
 		.openList(if="{edit}")
 			button.btn.btn-large.btn-primary.btn-block(onclick="{toggleMenuList}") 選択
 
 	.modal#menuList
-		menu-list
 		button.btn.btn-normal.btn-danger.btn-block(onclick="{toggleMenuList}") 閉じる
+		menu-list
 
 	script.
 		var store = require('../store');
@@ -94,7 +97,7 @@ recommend
 				name: data.name,
 				price: data.price,
 				comment: data.comment,
-				pic: data.image || 'poteto-salad.jpg'
+				pic: data.image || 'non-pic'
 			};
 			self.update();
 			self.toggleMenuList();
@@ -148,6 +151,17 @@ recommend
 			margin: 10px auto 0
 			.picture
 				width: 100%
+			.dummy
+				display: -webkit-flex
+				display: -moz-flex
+				display: -ms-flex
+				display: -o-flex
+				display: flex
+				align-items: center
+				justify-content: center
+				width: 100%
+				height: 250px
+				background: #eee
 			.onhover
 				display: none
 				.overlay
@@ -282,8 +296,15 @@ recommend
 				background: #2fcdb4
 				color: #fff
 			&.btn-outline
+				box-sizing: border-box
+				background: transparent
+				border: 2px solid
 				&.btn-warning
-					box-sizing: border-box
-					background: transparent
-					border: 2px solid  #d35400
+					border-color: #d35400
 					color: #d35400
+				&.btn-danger
+					border-color: #eb2142
+					color: #eb2142
+				&.btn-normal
+					border-color: #111
+					color: #111
