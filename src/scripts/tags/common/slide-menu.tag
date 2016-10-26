@@ -4,7 +4,10 @@ slide-menu
 			li.block
 				img.logo(src="./images/logo.svg")
 			li.list-item(each="{item in menu}")
-				a.anchor(href="#" onclick="{close(item.href)}" target="{item._blank ? '_blank' : '_self'}")
+				a.anchor(if="{!item._blank}" href="#" onclick="{close(item.href)}")
+					span.title {item.title}
+					span.icon(class="{item.icon}")
+				a.anchor(if="{item._blank}" href="{item.href}" target="_blank")
 					span.icon(class="{item.icon}")
 					span.title {item.title}
 

@@ -1,6 +1,6 @@
 home
 
-	a(href="http://examle.com" target="_blank").home-logo
+	a(href="http://村村村.com" target="_blank").home-logo
 		img(src="./images/logo.svg")
 
 	

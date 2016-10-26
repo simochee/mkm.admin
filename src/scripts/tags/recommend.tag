@@ -7,8 +7,7 @@ recommend
 			button.btn.btn-small(type="button" onclick="{toggleMode}" class="btn-{edit ? 'danger' : 'safety'}") {edit ? '保存' : '編集'}
 
 		.thumb(class="{disactive: !usePicture}")
-			.dummy(if="{data.pic == 'non-pic'}")
-				button.btn.btn-normal.btn-large.btn-outline(readonly) 画像がありません
+			.dummy(if="{data.pic == 'non-pic'}") 画像がありません
 			div(if="{data.pic != 'non-pic'}")
 				img.picture(src="./images/menu/{data.pic}")
 				.onhover
@@ -152,16 +151,13 @@ recommend
 			.picture
 				width: 100%
 			.dummy
-				display: -webkit-flex
-				display: -moz-flex
-				display: -ms-flex
-				display: -o-flex
-				display: flex
-				align-items: center
-				justify-content: center
 				width: 100%
 				height: 250px
 				background: #eee
+				text-align: center
+				line-height: 250px
+				font-size: 18px
+				color: #111
 			.onhover
 				display: none
 				.overlay
