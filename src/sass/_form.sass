@@ -1,0 +1,34 @@
+.input
+	position: relative
+	&::before
+		content: ""
+		position: absolute
+		left: 0
+		bottom: 0
+		display: block
+		width: 100%
+		height: 2px
+		border:
+			top: 0
+			left: 1px solid  #aaa
+			bottom: 1px solid  #aaa
+			right: 1px solid  #aaa
+	.input-form
+		width: 100%
+		padding: 0 5px
+		box-sizing: border-box
+		border: none
+	textarea.input-form
+		resize: none
+	&.large
+		.input-form
+			font-size: 20px
+			line-height: 40px
+	&.normal
+		.input-form
+			font-size: 16px
+			line-height: 30px
+	&.small
+		.input-form
+			font-size: 14px
+			line-height: 20px

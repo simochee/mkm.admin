@@ -1,2 +1,2 @@
 news
-	h1 News!
+	news-list

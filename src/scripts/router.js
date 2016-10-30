@@ -41,10 +41,20 @@ riot.route('/menu', () => {
 // News: /news - おしらせ
 riot.route('/news', () => {
 	require('./tags/news');
+	require('./tags/news-list');
 
 	navbar.setTitle('おしらせ');
 	// routeタグにnewsをマウント
 	riot.mount('route', 'news');
+});
+
+// News: /news/editor/:id - エディタ
+riot.route('/news/editor/*', (id) => {
+	require('./tags/news-editor');
+	require('./tags/news-editor-body')
+
+	navbar.setTitle('エディタ');
+	riot.mount('route', 'news-editor');
 });
 
 riot.route(() => {

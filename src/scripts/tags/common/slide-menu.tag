@@ -48,7 +48,7 @@ slide-menu
 			{
 				title: 'アクセス',
 				icon: 'ion-arrow-graph-up-right',
-				href: 'http://google.com',
+				href: 'http://analytics.google.com/analytics/web/',
 				_blank: true
 			}
 		]

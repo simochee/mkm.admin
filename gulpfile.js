@@ -38,7 +38,8 @@ gulp.task('public', () => {
 });
 
 gulp.task('watch', () => {
+	gulp.watch('./src/sass/**/*.sass', ['sass']);
 	gulp.watch('./src/pug/**/*.jade', ['pug']);
 });
 
-gulp.task('dev', ['watch', 'webpack', 'pug']);
+gulp.task('dev', ['watch', 'webpack', 'pug', 'sass']);
