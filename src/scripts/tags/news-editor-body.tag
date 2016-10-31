@@ -17,9 +17,10 @@ news-editor-body
 				i.fa.fa-code
 
 		.editor
+			.header
+				.title {opts.title || 'No Title'}
+				.date 2016/11/01
 			#editor
-
-			pre#preview
 	script.
 
 		this.on('mount', function() {
@@ -71,4 +72,37 @@ news-editor-body
 						border-bottom: 3px solid #02aedc
 
 		.editor
+			position: relative
 			width: 100%
+			padding-top: 30px
+			padding-bottom: 30px
+			background: #000
+			color: #fff
+			.header
+				.title
+					display: block
+					position: relative
+					width: 100%
+					padding: 5px 5px 10px
+					box-sizing: border-box
+					font-size: 24px
+					line-height: 30px
+					&::after
+						content: ''
+						position: absolute
+						bottom: 0
+						right: 1%
+						left: 1%
+						height: 1px
+						background-image: linear-gradient(to right, #000000, #888888)
+				.date
+					margin: 10px 10px 0 0
+					text-align: right
+					font-size: 12px
+					color: #aaa
+			iframe
+				display: block
+				width: 95%
+				margin: 0 auto
+				border: none
+				background: none

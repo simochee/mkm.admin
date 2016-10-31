@@ -13,13 +13,19 @@ news-editor
 					span.ion-alert-circled.icon
 					| 半角英数字と - (ハイフン)のみ入力可能です
 			li
-				news-editor-body
+				news-editor-body(title="{title}")
 
 	script.
 		var utils = require('../utils');
+		var self = this;
 
 		this.on('mount', function() {
-			utils.autoResize(document.getElementById('inputTitle'));
+			var $title = document.getElementById('inputTitle');
+			utils.autoResize($title);
+			$title.addEventListener('keyup', function() {
+				self.title = $title.value;
+				self.update();
+			});
 		});
 
 	style(type="sass").
