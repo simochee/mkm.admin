@@ -17,14 +17,15 @@ news-editor-body
 				i.fa.fa-code
 
 		.editor
-			iframe#editor
+			#editor
 
-	script(src="./src/scripts/libs/squire-row.js")
+			pre#preview
 	script.
 
-		var editor;
 		this.on('mount', function() {
-			var iframe = document.getElementById('editor');
+			// Squireオブジェクト
+			var editor;
+			var iframe = document.createElement('iframe');
 
 			iframe.addEventListener('load', function() {
 				var doc = iframe.contentDocument;
@@ -37,7 +38,15 @@ news-editor-body
 				editor = new Squire(doc, {
 					blockTag: 'p'
 				});
+
+				// StyleSheetを追加
+				var link = doc.createElement('link');
+				link.rel = 'stylesheet';
+				link.href = './stylesheets/editor.css';
+				doc.querySelector('head').appendChild(link);
 			}, false);
+
+			document.getElementById('editor').appendChild(iframe);
 		});
 
 	style(type="sass" scoped).
